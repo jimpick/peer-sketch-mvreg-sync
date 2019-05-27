@@ -124,8 +124,9 @@ for (let i = 0; i < numPeers; i++) {
   uiPeerStates[peerLabel] = { step: '', crdtValue: '' }
 }
 
-const d = diffy({fullscreen: true})
+// const d = diffy({fullscreen: true})
 
+/*
 d.render(
   () => {
     let text = `State: ${state.slice(0, d.width - 8)}\n\n`
@@ -142,13 +143,15 @@ d.render(
     return text
   }
 )
+*/
 
 const input = diffyInput({showCursor: false})
 
 const service = interpret(machine)
   .onTransition(nextState => {
     state = JSON.stringify(nextState.value)
-    d.render()
+    console.log('State', state)
+    // d.render()
   })
 service.start()
 
@@ -174,7 +177,8 @@ async function startRendezvous () {
 
   function appendToLog (chunk) {
     log.push(`RV: ` + chunk.toString().replace(/\s+$/, ''))
-    d.render()
+    console.log(`RV: ` + chunk.toString().replace(/\s+$/, ''))
+    // d.render()
   }
 }
 
@@ -195,13 +199,15 @@ function startPeer (peerLabel) {
     }
     if (message.crdtValue) {
       uiPeerStates[peerLabel].crdtValue = message.crdtValue
+      console.log('CRDT value', peerLabel, message.crdtValue)
     }
-    d.render()
+    // d.render()
   })
 
   function appendToLog (chunk) {
+    console.log(`${peerLabelUpper}: ` + chunk.toString().replace(/\s+$/, ''))
     log.push(`${peerLabelUpper}: ` + chunk.toString().replace(/\s+$/, ''))
-    d.render()
+    // d.render()
   }
   child.stdout.on('data', appendToLog)
   child.stderr.on('data', appendToLog)
@@ -211,6 +217,7 @@ function startPeer (peerLabel) {
 }
 
 function appendToLog (msg) {
-  log.push(msg)
-  d.render()
+  console.log(msg)
+  // log.push(msg)
+  // d.render()
 }
