@@ -11,7 +11,7 @@ const { assign } = actions
 
 const getPort = require('get-port')
 
-const numPeers = 26
+const numPeers = 2
 const peers = []
 
 const peerStates = {}

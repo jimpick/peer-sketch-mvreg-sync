@@ -1,3 +1,5 @@
+const util = require('util')
+
 const { Machine } = require('xstate')
 const { interpret } = require('xstate/lib/interpreter')
 
@@ -57,10 +59,10 @@ const peerMachine = Machine({
       invoke: {
         id: 'startPeerBase',
         src: async () => {
-          collaboration = await app.collaborate('collab1', 'rga')
+          collaboration = await app.collaborate('collab1', 'mvreg')
           collaboration.on('state changed', () => {
             process.send({
-              crdtValue: collaboration.shared.value().join('')
+              crdtValue: util.inspect(collaboration.shared.value())
             })
           })
         },
@@ -77,7 +79,7 @@ const peerMachine = Machine({
       invoke: {
         id: 'typeSomeStuff',
         src: async () => {
-          collaboration.shared.push(process.env['PEER_LABEL'])
+          collaboration.shared.write(process.env['PEER_LABEL'])
           await delay(1000)
         },
         onDone: 'done',
