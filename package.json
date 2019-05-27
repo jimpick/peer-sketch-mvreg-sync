@@ -1,0 +1,22 @@
+{
+  "name": "peer-sketch-mvreg-sync",
+  "version": "0.0.1",
+  "description": "Let's try to break mvreg",
+  "main": "index.js",
+  "scripts": {
+    "start": "node parent",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Jim Pick (@jimpick)",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "delay": "^4.1.0",
+    "diffy": "^2.1.0",
+    "get-port": "^4.1.0",
+    "libp2p-websocket-star-rendezvous": "^0.3.0",
+    "peer-base": "peer-base/peer-base#fix/load-ormap-causal-context",
+    "xstate": "^4.2.3"
+  }
+}
